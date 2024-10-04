@@ -34,13 +34,13 @@ class BimanualCatchEnvCfgV1(DirectRLEnvCfg):
     decimation = 2
     episode_length_s = 5.0
     action_scale = 2.0
-    num_actions = 44
-    one_frame_obs = 134
-    num_observations = 268
-    one_frame_states = 137
-    num_states = 274
+    num_actions = 36
+    one_frame_obs = 121
+    num_observations = 242
+    one_frame_states = 121
+    # num_states = 242
 
-    asymmetric_obs = True
+    asymmetric_obs = False
 
     # simulation
     sim: SimulationCfg = SimulationCfg(
@@ -66,7 +66,7 @@ class BimanualCatchEnvCfgV1(DirectRLEnvCfg):
     R_robot = ArticulationCfg(
         prim_path="/World/envs/env_.*/Right_Robot",
         spawn=sim_utils.UsdFileCfg(
-            usd_path=f"/home/kimsy/RL-kimsy/IsaacLab/source/extensions/omni.isaac.lab_tasks/omni/isaac/lab_tasks/direct/bimanual_catch/assets/sy_ur5e_with_allegro_right_fsr/sy_ur5e_with_allegro_right_fsr.usd",
+            usd_path=f"/home/kimsy/RL-kimsy/IsaacLab/source/extensions/omni.isaac.lab_tasks/omni/isaac/lab_tasks/direct/bimanual_catch/assets/bimanual_right/bimanual_right.usd",
             activate_contact_sensors=True,
             rigid_props=sim_utils.RigidBodyPropertiesCfg(
             disable_gravity=False,
@@ -85,20 +85,16 @@ class BimanualCatchEnvCfgV1(DirectRLEnvCfg):
                 "wrist_2_joint": -0.5*math.pi,
                 "wrist_3_joint": 0.0,
 
-                "joint_index_0": 0.0,
                 "joint_index_1": 0.0,
                 "joint_index_2": 0.0,
                 "joint_index_3": 0.0,
-                "joint_middle_0": 0.0,
                 "joint_middle_1": 0.0,
                 "joint_middle_2": 0.0,
                 "joint_middle_3": 0.0,
-                "joint_ring_0":0.0,
                 "joint_ring_1":0.0,
                 "joint_ring_2":0.0,
                 "joint_ring_3":0.0,
-                "joint_thumb_0":0.263,
-                "joint_thumb_1":0.0,
+                "joint_thumb_0":0.363,
                 "joint_thumb_2":0.0,
                 "joint_thumb_3":0.0,
             },
@@ -114,7 +110,7 @@ class BimanualCatchEnvCfgV1(DirectRLEnvCfg):
                 damping=40.0,
             ),
             "hand": ImplicitActuatorCfg(
-                joint_names_expr=["joint_index_[0-3]","joint_middle_[0-3]","joint_ring_[0-3]","joint_thumb_[0-3]"],
+                joint_names_expr=["joint_index_[1-3]","joint_middle_[1-3]","joint_ring_[1-3]","joint_thumb_0","joint_thumb_2","joint_thumb_3"],
                 effort_limit=0.5,
                 velocity_limit=100.0,
                 stiffness=3.0,
@@ -127,7 +123,7 @@ class BimanualCatchEnvCfgV1(DirectRLEnvCfg):
     L_robot = ArticulationCfg(
         prim_path="/World/envs/env_.*/Left_Robot",
         spawn=sim_utils.UsdFileCfg(
-            usd_path=f"/home/kimsy/RL-kimsy/IsaacLab/source/extensions/omni.isaac.lab_tasks/omni/isaac/lab_tasks/direct/bimanual_catch/assets/sy_ur5e_with_allegro_left_fsr/sy_ur5e_with_allegro_left_fsr.usd",
+            usd_path=f"/home/kimsy/RL-kimsy/IsaacLab/source/extensions/omni.isaac.lab_tasks/omni/isaac/lab_tasks/direct/bimanual_catch/assets/bimanual_left/bimanual_left.usd",
             activate_contact_sensors=True,
             rigid_props=sim_utils.RigidBodyPropertiesCfg(
             disable_gravity=False,
@@ -146,20 +142,16 @@ class BimanualCatchEnvCfgV1(DirectRLEnvCfg):
                 "wrist_2_joint": 0.5*math.pi,
                 "wrist_3_joint": 0.0,
 
-                "joint_index_0": 0.0,
                 "joint_index_1": 0.0,
                 "joint_index_2": 0.0,
                 "joint_index_3": 0.0,
-                "joint_middle_0": 0.0,
                 "joint_middle_1": 0.0,
                 "joint_middle_2": 0.0,
                 "joint_middle_3": 0.0,
-                "joint_ring_0":0.0,
                 "joint_ring_1":0.0,
                 "joint_ring_2":0.0,
                 "joint_ring_3":0.0,
-                "joint_thumb_0":0.263,
-                "joint_thumb_1":0.0,
+                "joint_thumb_0":0.363,
                 "joint_thumb_2":0.0,
                 "joint_thumb_3":0.0,
             },
@@ -175,7 +167,7 @@ class BimanualCatchEnvCfgV1(DirectRLEnvCfg):
                 damping=40.0,
             ),
             "hand": ImplicitActuatorCfg(
-                joint_names_expr=["joint_index_[0-3]","joint_middle_[0-3]","joint_ring_[0-3]","joint_thumb_[0-3]"],
+                joint_names_expr=["joint_index_[1-3]","joint_middle_[1-3]","joint_ring_[1-3]","joint_thumb_0","joint_thumb_2","joint_thumb_3"],
                 effort_limit=0.5,
                 velocity_limit=100.0,
                 stiffness=3.0,
@@ -192,20 +184,20 @@ class BimanualCatchEnvCfgV1(DirectRLEnvCfg):
         "wrist_1_joint",
         "wrist_2_joint",
         "wrist_3_joint",
-        "joint_index_0",
+
         "joint_index_1",
         "joint_index_2",
         "joint_index_3",
-        "joint_middle_0",
+
         "joint_middle_1",
         "joint_middle_2",
         "joint_middle_3",
-        "joint_ring_0",
+
         "joint_ring_1",
         "joint_ring_2",
         "joint_ring_3",
         "joint_thumb_0",
-        "joint_thumb_1",
+
         "joint_thumb_2",
         "joint_thumb_3",
     ]
@@ -267,7 +259,7 @@ class BimanualCatchEnvCfgV1(DirectRLEnvCfg):
     cube_cfg = RigidObjectCfg(
         prim_path="/World/envs/env_.*/Cube",
         spawn = sim_utils.CuboidCfg(
-            size=(0.1,0.1,0.1),
+            size=(0.15,0.15,0.15),
             rigid_props=sim_utils.RigidBodyPropertiesCfg(),
             mass_props=sim_utils.MassPropertiesCfg(mass=0.1),
             collision_props=sim_utils.CollisionPropertiesCfg(),
@@ -340,9 +332,9 @@ class BimanualCatchEnvCfgV1(DirectRLEnvCfg):
     R_dist_reward_scale = 1.0
     L_dist_reward_scale = 1.0
     action_penalty_scale = 0.001
-    collision_penalty_scale = 0.01
+    collision_penalty_scale = 0.001
     hit_bonus = 3.0
-    drop_penalty_scale = 10.0
+    drop_penalty = 10.0
     object_height_threshold = 1.0
     reach_goal_bonus = 10.0
     success_tolerance = 0.05
@@ -408,19 +400,18 @@ class BimanualCatchEnvV1(DirectRLEnv):
         # list of actuated joints
         self.actuated_dof_indices = list()
         for joint_name in self.cfg.actuated_joint_names:
-            # print(self._robot.joint_names.index(joint_name), joint_name)
+            print(self.R_robot.joint_names.index(joint_name), joint_name)
             self.actuated_dof_indices.append(self.R_robot.joint_names.index(joint_name))
         for joint_name in self.cfg.actuated_joint_names:
+            print(self.L_robot.joint_names.index(joint_name), joint_name)
             self.actuated_dof_indices.append(self.L_robot.joint_names.index(joint_name))
-        self.actuated_dof_indices.sort()
+        print(self.actuated_dof_indices)
+        # self.actuated_dof_indices.sort()
 
         # buffers for position targets
         self.robot_dof_targets = torch.zeros((self.num_envs, self.num_robot_dofs), dtype=torch.float, device=self.device)
         self.prev_targets = torch.zeros((self.num_envs, self.num_robot_dofs), dtype=torch.float, device=self.device)
         self.cur_targets = torch.zeros((self.num_envs, self.num_robot_dofs), dtype=torch.float, device=self.device)
-
-        # initialize goal marker
-        self.goal_markers = VisualizationMarkers(self.cfg.goal_object_cfg)
 
         # track goal resets
         self.reset_goal_buf = torch.zeros(self.num_envs, dtype=torch.bool, device=self.device)
@@ -447,6 +438,9 @@ class BimanualCatchEnvV1(DirectRLEnv):
 
         self.reduced_obs_buf = torch.zeros((self.num_envs, self.cfg.one_frame_obs*self.cfg.num_stacks), device=self.device)
         self.state_buf = torch.zeros((self.num_envs, self.cfg.one_frame_states*self.cfg.num_stacks), device=self.device)
+
+        self.R_closest_dist = torch.full((self.num_envs,), float("inf"), device=self.device)
+        self.L_closest_dist = torch.full((self.num_envs,), float("inf"), device=self.device)
 
     def _setup_scene(self):
         self.R_robot = Articulation(self.cfg.R_robot)
@@ -482,47 +476,47 @@ class BimanualCatchEnvV1(DirectRLEnv):
 
     def _apply_action(self):
         # apply right robot actions
-        self.cur_targets[:,self.actuated_dof_indices[6:22]] = scale(
-            self.actions[:,6:22],
-            self.R_robot_dof_lower_limits[:,self.actuated_dof_indices[6:22]],
-            self.R_robot_dof_upper_limits[:,self.actuated_dof_indices[6:22]],
+        self.cur_targets[:,self.actuated_dof_indices[6:18]] = scale(
+            self.actions[:,6:18],
+            self.R_robot_dof_lower_limits[:,self.actuated_dof_indices[6:18]],
+            self.R_robot_dof_upper_limits[:,self.actuated_dof_indices[6:18]],
         )
-        self.cur_targets[:,self.actuated_dof_indices[6:22]] = (
-            self.cfg.act_moving_average * self.cur_targets[:,self.actuated_dof_indices[6:22]]
-            + (1.0 - self.cfg.act_moving_average) * self.prev_targets[:,self.actuated_dof_indices[6:22]]
+        self.cur_targets[:,self.actuated_dof_indices[6:18]] = (
+            self.cfg.act_moving_average * self.cur_targets[:,self.actuated_dof_indices[6:18]]
+            + (1.0 - self.cfg.act_moving_average) * self.prev_targets[:,self.actuated_dof_indices[6:18]]
         )
 
         self.cur_targets[:,self.actuated_dof_indices[:6]] = self.prev_targets[:,self.actuated_dof_indices[:6]] + self.actions[:,:6] * self.cfg.action_scale * self.dt
 
-        self.cur_targets[:,self.actuated_dof_indices[:22]] = saturate(
-            self.cur_targets[:, self.actuated_dof_indices[:22]],
-            self.R_robot_dof_lower_limits[:, self.actuated_dof_indices[:22]],
-            self.R_robot_dof_upper_limits[:, self.actuated_dof_indices[:22]],
+        self.cur_targets[:,self.actuated_dof_indices[:18]] = saturate(
+            self.cur_targets[:, self.actuated_dof_indices[:18]],
+            self.R_robot_dof_lower_limits[:, self.actuated_dof_indices[:18]],
+            self.R_robot_dof_upper_limits[:, self.actuated_dof_indices[:18]],
         )
 
         # apply left robot actions
-        self.cur_targets[:,self.actuated_dof_indices[22:28]] = scale(
-            self.actions[:,22:28],
-            self.L_robot_dof_lower_limits[:,self.actuated_dof_indices[22:28]],
-            self.L_robot_dof_upper_limits[:,self.actuated_dof_indices[22:28]],
+        self.cur_targets[:,self.actuated_dof_indices[24:]] = scale(
+            self.actions[:,24:],
+            self.L_robot_dof_lower_limits[:,self.actuated_dof_indices[24:]],
+            self.L_robot_dof_upper_limits[:,self.actuated_dof_indices[24:]],
         )
-        self.cur_targets[:,self.actuated_dof_indices[28:]] = (
-            self.cfg.act_moving_average * self.cur_targets[:,self.actuated_dof_indices[28:]]
-            + (1.0 - self.cfg.act_moving_average) * self.prev_targets[:,self.actuated_dof_indices[28:]]
+        self.cur_targets[:,self.actuated_dof_indices[24:]] = (
+            self.cfg.act_moving_average * self.cur_targets[:,self.actuated_dof_indices[24:]]
+            + (1.0 - self.cfg.act_moving_average) * self.prev_targets[:,self.actuated_dof_indices[24:]]
         )
 
-        self.cur_targets[:,self.actuated_dof_indices[22:28]] = self.prev_targets[:,self.actuated_dof_indices[22:28]] + self.actions[:,22:28] * self.cfg.action_scale * self.dt
+        self.cur_targets[:,self.actuated_dof_indices[18:24]] = self.prev_targets[:,self.actuated_dof_indices[18:24]] + self.actions[:,18:24] * self.cfg.action_scale * self.dt
 
-        self.cur_targets[:,self.actuated_dof_indices[22:]] = saturate(
-            self.cur_targets[:, self.actuated_dof_indices[22:]],
-            self.L_robot_dof_lower_limits[:, self.actuated_dof_indices[22:]],
-            self.L_robot_dof_upper_limits[:, self.actuated_dof_indices[22:]],
+        self.cur_targets[:,self.actuated_dof_indices[18:]] = saturate(
+            self.cur_targets[:, self.actuated_dof_indices[18:]],
+            self.L_robot_dof_lower_limits[:, self.actuated_dof_indices[18:]],
+            self.L_robot_dof_upper_limits[:, self.actuated_dof_indices[18:]],
         )
 
         self.prev_targets[:,self.actuated_dof_indices] = self.cur_targets[:,self.actuated_dof_indices]
 
-        self.R_robot.set_joint_position_target(self.cur_targets[:,self.actuated_dof_indices[:22]], joint_ids=self.actuated_dof_indices[:22])
-        self.L_robot.set_joint_position_target(self.cur_targets[:,self.actuated_dof_indices[22:]], joint_ids=self.actuated_dof_indices[22:])
+        self.R_robot.set_joint_position_target(self.cur_targets[:,self.actuated_dof_indices[:18]], joint_ids=self.actuated_dof_indices[:18])
+        self.L_robot.set_joint_position_target(self.cur_targets[:,self.actuated_dof_indices[18:]], joint_ids=self.actuated_dof_indices[18:])
 
     # post-physics step calls
 
@@ -538,6 +532,8 @@ class BimanualCatchEnvV1(DirectRLEnv):
         (
             total_reward,
             self.successes[:],
+            self.R_closest_dist,
+            self.L_closest_dist,
         ) = compute_rewards(
             self.reset_buf,
             self.reset_goal_buf,
@@ -547,6 +543,8 @@ class BimanualCatchEnvV1(DirectRLEnv):
             self.object_pos,
             self.R_hand_pos,
             self.L_hand_pos,
+            self.R_closest_dist,
+            self.L_closest_dist,
             self.R_contact_sensors_val,
             self.L_contact_sensors_val,
             self.actions,
@@ -554,16 +552,11 @@ class BimanualCatchEnvV1(DirectRLEnv):
             self.cfg.L_dist_reward_scale,
             self.cfg.action_penalty_scale,
             self.cfg.collision_penalty_scale,
-            self.cfg.drop_penalty_scale,
+            self.cfg.drop_penalty,
             self.cfg.reach_goal_bonus,
             self.cfg.hit_bonus,
             self.cfg.success_tolerance,
         )
-
-        # reset goals if the goal has been reached
-        goal_env_ids = self.reset_goal_buf.nonzero(as_tuple=False).squeeze(-1)
-        if len(goal_env_ids) > 0:
-            self._reset_goal_pose(goal_env_ids)
         
         return total_reward
 
@@ -590,8 +583,8 @@ class BimanualCatchEnvV1(DirectRLEnv):
         R_joint_vel = torch.zeros_like(R_joint_pos)
         self.R_robot.set_joint_position_target(R_joint_pos, env_ids=env_ids)
         self.R_robot.write_joint_state_to_sim(R_joint_pos, R_joint_vel, env_ids=env_ids)
-        self.robot_dof_targets[env_ids,:22] = R_joint_pos
-        self.prev_targets[env_ids,:22] = R_joint_pos
+        self.robot_dof_targets[env_ids,:18] = R_joint_pos
+        self.prev_targets[env_ids,:18] = R_joint_pos
 
         # set left robot states
         L_joint_pos = self.L_robot.data.default_joint_pos[env_ids] + sample_uniform(
@@ -605,17 +598,12 @@ class BimanualCatchEnvV1(DirectRLEnv):
         L_joint_vel = torch.zeros_like(L_joint_pos)
         self.L_robot.set_joint_position_target(L_joint_pos, env_ids=env_ids)
         self.L_robot.write_joint_state_to_sim(L_joint_pos, L_joint_vel, env_ids=env_ids)
-        self.robot_dof_targets[env_ids,:22] = L_joint_pos
-        self.prev_targets[env_ids,:22] = L_joint_pos
+        self.robot_dof_targets[env_ids,18:] = L_joint_pos
+        self.prev_targets[env_ids,18:] = L_joint_pos
 
         # object state
         object_default_state = self._object.data.default_root_state.clone()[env_ids]
         random_pos, random_vel, goal_pos = self.get_object_random_pose(env_ids=env_ids)
-
-        self.goal_pos[env_ids] = goal_pos
-        
-        # reset goals
-        self._reset_goal_pose(env_ids)
 
         object_default_state[:, 0:3] = (
             object_default_state[:, 0:3] + random_pos + self.scene.env_origins[env_ids]
@@ -627,12 +615,6 @@ class BimanualCatchEnvV1(DirectRLEnv):
 
         # Need to refresh the intermediate values so that _get_observations() can use the latest values
         self._compute_intermediate_values()
-
-    def _reset_goal_pose(self, env_ids):
-        visualize_pos = self.goal_pos + self.scene.env_origins
-        # self.goal_markers.visualize(visualize_pos, self.goal_rot)
-
-        self.reset_goal_buf[env_ids] = 0
 
     def get_object_random_pose(self, env_ids: torch.Tensor | None):
         Xs = torch.rand_like(self._object.data.default_root_state[env_ids,0])*(self.cfg.range_Xs[1]-self.cfg.range_Xs[0]) + self.cfg.range_Xs[0]
@@ -680,24 +662,24 @@ class BimanualCatchEnvV1(DirectRLEnv):
         self.compute_full_state()
 
         observations = {"policy": self.state_buf}
-        if self.cfg.asymmetric_obs:
-            self.compute_full_state()
-        if self.cfg.asymmetric_obs:
-            observations = {"policy": self.reduced_obs_buf, "critic":self.state_buf}
+        # if self.cfg.asymmetric_obs:
+        #     self.compute_full_state()
+        # if self.cfg.asymmetric_obs:
+        #     observations = {"policy": self.reduced_obs_buf, "critic":self.state_buf}
         
         return observations
 
     def compute_full_state(self):
         self.state_buf[:,0:3] = self.R_hand_pos
         self.state_buf[:,3:7] = self.R_hand_rot
-        self.state_buf[:,7:29] = self.R_robot_joint_pos
-        self.state_buf[:,29:45] = self.R_contact_sensors_val
-        self.state_buf[:,45:48] = self.L_hand_pos
-        self.state_buf[:,48:52] = self.L_hand_rot
-        self.state_buf[:,52:74] = self.L_robot_joint_pos
-        self.state_buf[:,74:90] = self.L_contact_sensors_val
-        self.state_buf[:,90:134] = self.actions
-        self.state_buf[:,134:137] = self.object_pos
+        self.state_buf[:,7:25] = self.R_robot_joint_pos
+        self.state_buf[:,25:41] = self.R_contact_sensors_val
+        self.state_buf[:,41:44] = self.L_hand_pos
+        self.state_buf[:,44:48] = self.L_hand_rot
+        self.state_buf[:,48:66] = self.L_robot_joint_pos
+        self.state_buf[:,66:82] = self.L_contact_sensors_val
+        self.state_buf[:,82:118] = self.actions
+        self.state_buf[:,118:121] = self.object_pos
 
         for i in range(len(self.states_buf_stack_frames)-1):
             self.state_buf[:, (i+1)*self.cfg.one_frame_states:(i+2)*self.cfg.one_frame_states] = self.states_buf_stack_frames[i]
@@ -706,13 +688,12 @@ class BimanualCatchEnvV1(DirectRLEnv):
     def compute_reduced_obs(self):
         self.state_buf[:,0:3] = self.R_hand_pos
         self.state_buf[:,3:7] = self.R_hand_rot
-        self.state_buf[:,7:29] = self.R_robot_joint_pos
-        self.state_buf[:,29:45] = self.R_contact_sensors_val
-        self.state_buf[:,45:48] = self.L_hand_pos
-        self.state_buf[:,48:52] = self.L_hand_rot
-        self.state_buf[:,52:74] = self.L_robot_joint_pos
-        self.state_buf[:,74:90] = self.L_contact_sensors_val
-        self.state_buf[:,90:134] = self.actions
+        self.state_buf[:,7:25] = self.R_robot_joint_pos
+        self.state_buf[:,25:41] = self.R_contact_sensors_val
+        self.state_buf[:,41:44] = self.L_hand_pos
+        self.state_buf[:,44:48] = self.L_hand_rot
+        self.state_buf[:,48:66] = self.L_robot_joint_pos
+        self.state_buf[:,66:82] = self.L_contact_sensors_val
 
         for i in range(len(self.obs_buf_stack_frames)-1):
             self.reduced_obs_buf[:, (i+1)*self.cfg.one_frame_obs:(i+2)*self.cfg.one_frame_obs] = self.obs_buf_stack_frames[i]
@@ -728,7 +709,8 @@ class BimanualCatchEnvV1(DirectRLEnv):
         self.R_hand_rot = self.R_robot.data.body_quat_w[env_ids, self.R_palm_link_idx]
         self.R_robot_joint_pos = self.R_robot.data.joint_pos
         R_contact_sensors_val_raw = self.scene["R_contact_sensors"].data.net_forces_w[..., 2]
-        self.R_contact_sensors_val = torch.where(R_contact_sensors_val_raw != 0.0, 1.0, 0.0)
+        self.R_contact_sensors_val = torch.where(R_contact_sensors_val_raw > 0.01, 1.0, 0.0)
+        # print("Right Contact",R_contact_sensors_val_raw)
 
         # get left robot states
         self.L_hand_pos = self.L_robot.data.body_pos_w[env_ids, self.L_palm_link_idx]
@@ -736,8 +718,9 @@ class BimanualCatchEnvV1(DirectRLEnv):
         self.L_hand_rot = self.L_robot.data.body_quat_w[env_ids, self.L_palm_link_idx]
         self.L_robot_joint_pos = self.L_robot.data.joint_pos
         L_contact_sensors_val_raw = self.scene["L_contact_sensors"].data.net_forces_w[..., 2]
-        self.L_contact_sensors_val = torch.where(L_contact_sensors_val_raw != 0.0, 1.0, 0.0)
-
+        self.L_contact_sensors_val = torch.where(L_contact_sensors_val_raw > 0.01, 1.0, 0.0)
+        # print("Left Contact",L_contact_sensors_val_raw)
+        
         # get object position
         self.object_pos = self._object.data.root_pos_w - self.scene.env_origins
 
@@ -751,6 +734,8 @@ def compute_rewards(
     object_pos: Tensor,
     R_hand_pos: Tensor,
     L_hand_pos: Tensor,
+    R_closest_dist: Tensor,
+    L_closest_dist: Tensor,
     R_contact_sensors: Tensor,
     L_contact_sensors: Tensor,
     actions: Tensor,
@@ -758,19 +743,21 @@ def compute_rewards(
     L_dist_reward_scales: float,
     action_penalty_scales: float,
     collision_penalty_scales: float,
-    drop_penalty_scales: float,
+    drop_penalty: float,
     reach_goal_bonus: float,
     hit_bonus: float,
     success_tolerance: float,
 ):
 
     # distance from right hand to object position
-    R_d_catch = torch.norm(R_hand_pos - object_pos, p=2, dim=-1)
-    R_dist_reward = torch.exp(-10.0*R_d_catch)
+    R_object_dist = torch.norm(R_hand_pos - object_pos, p=2, dim=-1)
+    R_dist_reward = torch.where((R_closest_dist < R_object_dist), torch.tensor(0.0, device=R_closest_dist.device), R_object_dist)
+    R_closest_dist = torch.where((R_closest_dist < R_object_dist), R_closest_dist, R_object_dist)
 
     # distance from right hand to object position
-    L_d_catch = torch.norm(L_hand_pos - object_pos, p=2, dim=-1)
-    L_dist_reward = torch.exp(-10.0*L_d_catch)
+    L_object_dist = torch.norm(L_hand_pos - object_pos, p=2, dim=-1)
+    L_dist_reward = torch.where((L_closest_dist < L_object_dist), torch.tensor(0.0, device=L_closest_dist.device), L_object_dist)
+    L_closest_dist = torch.where((L_closest_dist < L_object_dist), L_closest_dist, L_object_dist)
 
     # torque penalty for preventing weird motion
     action_penalty = torch.sum(actions**2, dim=-1)
@@ -789,10 +776,11 @@ def compute_rewards(
     # bonus reward for hitting hand
     R_is_contact = torch.any(R_contact_sensors, dim=-1)
     L_is_contact = torch.any(L_contact_sensors, dim=-1)
-    rewards = torch.where(R_is_contact & L_is_contact, rewards + hit_bonus, torch.where(R_is_contact | L_is_contact, rewards + hit_bonus/2, rewards))
-    rewards = torch.where((episode_length > 10)&(object_pos[:,2] < 1.0), rewards - drop_penalty_scales, rewards)
 
-    return rewards, successes
+    rewards = torch.where(R_is_contact & L_is_contact, rewards + hit_bonus, torch.where(R_is_contact | L_is_contact, rewards + hit_bonus/2, rewards))
+    rewards = torch.where((episode_length > 10)&(object_pos[:,2] < 1.0), rewards - drop_penalty, rewards)
+    print(rewards)
+    return rewards, successes, R_closest_dist, L_closest_dist   
 
 @torch.jit.script
 def scale(x, lower, upper):
